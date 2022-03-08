@@ -17,6 +17,7 @@ import com.example.restaurantreview.model.Restaurant
 import com.example.restaurantreview.model.RestaurantResponse
 import com.example.restaurantreview.network.ApiConfig
 import com.example.restaurantreview.ui.viewmodel.MainViewModel
+import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -52,6 +53,12 @@ class MainActivity : AppCompatActivity() {
 
         mainViewModel.isLoading.observe(this){
             showLoading(it)
+        }
+
+        mainViewModel.snackBarText.observe(this){
+            it.getContentIfNotHandled()?.let { snackBarText ->
+                Snackbar.make(window.decorView.rootView, snackBarText, Snackbar.LENGTH_SHORT).show()
+            }
         }
 
 
